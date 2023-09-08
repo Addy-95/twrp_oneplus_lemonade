@@ -8,59 +8,9 @@
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
-# Alert slider
-PRODUCT_PACKAGES += \
-    KeyHandler \
-    tri-state-key-calibrate
-
-# Audio
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio/audio_platform_info_intcodec.xml:$(TARGET_COPY_OUT_ODM)/etc/audio_platform_info.xml \
-    $(LOCAL_PATH)/audio/audio_platform_info_intcodec.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_lahaina/audio_platform_info_intcodec.xml \
-    $(LOCAL_PATH)/audio/mixer_paths.xml:$(TARGET_COPY_OUT_ODM)/etc/mixer_paths.xml \
-    $(LOCAL_PATH)/audio/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_lahaina/mixer_paths.xml \
-    $(LOCAL_PATH)/audio/sound_trigger_mixer_paths.xml:$(TARGET_COPY_OUT_ODM)/etc/sound_trigger_mixer_paths.xml \
-    $(LOCAL_PATH)/audio/sound_trigger_mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_lahaina/sound_trigger_mixer_paths.xml \
-    $(LOCAL_PATH)/audio/sound_trigger_platform_info.xml:$(TARGET_COPY_OUT_ODM)/etc/sound_trigger_platform_info.xml \
-    $(LOCAL_PATH)/audio/sound_trigger_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_lahaina/sound_trigger_platform_info.xml
-
 # Boot animation
-TARGET_SCREEN_HEIGHT := 2400
-TARGET_SCREEN_WIDTH := 1080
-
-# Device init scripts
-#PRODUCT_PACKAGES += \
-#    init.recovery.target.rc
-
-# Camera
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/media/media_profiles_vendor.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_vendor.xml
-
-# NFC
-PRODUCT_PACKAGES += \
-    android.hardware.nfc-service.nxp \
-    com.android.nfc_extras \
-    Tag
-
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.nfc.ese.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.ese.xml \
-    frameworks/native/data/etc/android.hardware.nfc.hce.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.hce.xml \
-    frameworks/native/data/etc/android.hardware.nfc.hcef.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.hcef.xml \
-    frameworks/native/data/etc/android.hardware.nfc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.xml \
-    frameworks/native/data/etc/android.hardware.se.omapi.ese.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.se.omapi.ese.xml \
-    frameworks/native/data/etc/android.hardware.se.omapi.uicc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.se.omapi.uicc.xml \
-    frameworks/native/data/etc/com.android.nfc_extras.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.android.nfc_extras.xml \
-    frameworks/native/data/etc/com.nxp.mifare.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.nxp.mifare.xml
-
-# Overlays
-DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/overlay-lineage
-
-PRODUCT_PACKAGES += \
-    OPlusFrameworksResTarget \
-    OPlusSettingsProviderResTarget \
-    OPlusSettingsResTarget \
-    OPlusSystemUIResTarget
+TARGET_SCREEN_HEIGHT := 3168
+TARGET_SCREEN_WIDTH := 1440
 
 # PowerShare
 PRODUCT_PACKAGES += \
@@ -73,12 +23,6 @@ PRODUCT_SOONG_NAMESPACES += \
 # Inherit from the common OEM chipset makefile.
 $(call inherit-product, device/oneplus/sm8350-common/common.mk)
 
-## Inherit from vendor blobs
-#$(call inherit-product, vendor/oneplus/lemonade/lemonade-vendor.mk)
-
-PRODUCT_SOONG_NAMESPACES += \
-    vendor/qcom/opensource/commonsys-intf/display
-
 PRODUCT_PACKAGES += \
     qcom_decrypt \
     qcom_decrypt_fbe
@@ -89,11 +33,12 @@ TW_INCLUDE_CRYPTO_FBE := true
 TW_INCLUDE_FBE_METADATA_DECRYPT := true
 PLATFORM_SECURITY_PATCH := 2099-12-31
 VENDOR_SECURITY_PATCH := 2099-12-31
-PLATFORM_VERSION := 127
+PLATFORM_VERSION := 99.87.36
 PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
 BOARD_USES_QCOM_FBE_DECRYPTION := true
+TW_USE_FSCRYPT_POLICY := 2
 
-TARGET_RECOVERY_DEVICE_MODULES += libion libandroidicu vendor.display.config@1.0 vendor.display.config@2.0 libdisplayconfig.qti device_manifest.xml system_manifest.xml
+TARGET_RECOVERY_DEVICE_MODULES += libion vendor.display.config@1.0 vendor.display.config@2.0 libdisplayconfig.qti device_manifest.xml system_manifest.xml
 
 # TWRP specific build flags
 TW_THEME := portrait_hdpi
@@ -101,14 +46,14 @@ RECOVERY_SDCARD_ON_DATA := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_EXTRA_LANGUAGES := true
+TW_DEFAULT_LANGUAGE := en
 TW_INCLUDE_NTFS_3G := true
 TW_USE_TOOLBOX := true
 TW_INCLUDE_RESETPROP := true
 TW_INCLUDE_REPACKTOOLS := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
-TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel0-backlight/brightness"
-TW_Y_OFFSET := 80
-TW_H_OFFSET := -80
+TW_Y_OFFSET := 95
+TW_H_OFFSET := -95
 TWRP_INCLUDE_LOGCAT := true
 TARGET_USES_LOGD := true
 TARGET_USES_MKE2FS := true
@@ -116,8 +61,18 @@ TW_NO_SCREEN_BLANK := true
 TW_HAS_EDL_MODE := true
 TW_EXCLUDE_APEX := true
 TW_CUSTOM_CPU_TEMP_PATH := "/sys/class/thermal/msm-therm/temp"
+TW_INCLUDE_FASTBOOTD := true
+TW_EXCLUDE_TWRPAPP := true
+
+TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel0-backlight/brightness"
+TW_DEFAULT_BRIGHTNESS := 1500
+TW_MAX_BRIGHTNESS := 4095
 
 TW_LOAD_VENDOR_MODULES := "touchscreen.ko aw8697.ko adsp_loader_dlkm.ko oplus_chg.ko"
+
+#Properties
+TW_OVERRIDE_SYSTEM_PROPS := \
+    "ro.build.date.utc;ro.build.fingerprint=ro.system.build.fingerprint;ro.build.version.incremental"
 
 RECOVERY_LIBRARY_SOURCE_FILES += \
     $(TARGET_OUT_SHARED_LIBRARIES)/libion.so \
@@ -126,6 +81,9 @@ RECOVERY_LIBRARY_SOURCE_FILES += \
     $(TARGET_OUT_SYSTEM_EXT_SHARED_LIBRARIES)/libdisplayconfig.qti.so
 
 PRODUCT_COPY_FILES += \
-    $(OUT_DIR)/target/product/lemonade/obj/SHARED_LIBRARIES/libandroidicu_intermediates/libandroidicu.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libandroidicu.so \
     $(OUT_DIR)/target/product/lemonade/system/etc/vintf/manifest.xml:$(TARGET_COPY_OUT_RECOVERY)/root/system/etc/vintf/manifest.xml \
     $(OUT_DIR)/target/product/lemonade/vendor/etc/vintf/manifest.xml:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/etc/vintf/manifest.xml
+
+
+# Inherit from the proprietary files makefile.
+$(call inherit-product, vendor/oneplus/lemonade/lemonade-vendor.mk)
