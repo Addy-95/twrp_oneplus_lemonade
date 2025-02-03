@@ -14,19 +14,19 @@
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
 
 # Inherit from the custom device configuration.
 $(call inherit-product, device/oneplus/oneplus9/device.mk)
 
-# Inherit from the AOSPA configuration.
-$(call inherit-product, vendor/aospa/target/product/aospa-target.mk)
+# Inherit from the TWRP configuration.
+$(call inherit-product, vendor/twrp/config/common.mk)
 
 PRODUCT_BRAND := OnePlus
 PRODUCT_DEVICE := oneplus9
 PRODUCT_MANUFACTURER := OnePlus
 PRODUCT_MODEL := LE2115
-PRODUCT_NAME := aospa_oneplus9
+PRODUCT_NAME := twrp_oneplus9
 
 PRODUCT_SYSTEM_NAME := OnePlus9
 PRODUCT_SYSTEM_DEVICE := OnePlus9
